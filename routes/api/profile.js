@@ -15,14 +15,13 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res)=>{
         if(profile){
             res.json(profile);
         } else {
+            
             errors.noprofile = 'No profile found'
             return res.status(404).json(errors)
         }
     }).catch(err=>{
         res.status(404).json(err);
     })
-    // ssssssssssssssssssssssssssssssss
-    // sssssssssssfcvvvvvvvvvvvvv
 })
 
 
