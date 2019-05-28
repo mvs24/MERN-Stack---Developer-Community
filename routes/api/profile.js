@@ -22,6 +22,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res)=>{
         res.status(404).json(err);
     })
     // ssssssssssssssssssssssssssssssss
+    // sssssssssssfcvvvvvvvvvvvvv
 })
 
 
