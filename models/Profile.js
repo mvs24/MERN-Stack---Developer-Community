@@ -35,7 +35,7 @@ let ProfileSchema = new Schema({
         type: String
     },
     experience: [
-        {
+{
             title: {
             type: String,
             required: true
