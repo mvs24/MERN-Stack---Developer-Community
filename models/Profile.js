@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Profile Model
+
 const ProfileSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
@@ -28,7 +28,7 @@ const ProfileSchema = new Schema({
     skills: {
         type: [String],
         required: true
-    },
+    }, 
     bio: {
         type: String
     },
