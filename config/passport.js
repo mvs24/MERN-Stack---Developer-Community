@@ -8,6 +8,7 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
 
+<<<<<<< HEAD
 module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
@@ -21,3 +22,18 @@ module.exports = passport => {
     })
   );
 };
+=======
+module.exports= passport => {
+    passport.use(new JwtStrategy(opts, (jwt_payload, done)=>{
+        // console.log(jwt_payload);
+        User.findById(jwt_payload.id).then(user=>{
+            //console.log(user);
+            if(user){
+                
+                return done(null, user);
+            }
+            return done(null, false);
+        })
+    }));
+}
+>>>>>>> bab6066989b81a1abc374010b0fe9306bce31261

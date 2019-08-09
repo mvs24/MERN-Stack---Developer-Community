@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+<<<<<<< HEAD
 
 const ProfileSchema = new Schema({
+=======
+let ProfileSchema = new Schema({
+>>>>>>> bab6066989b81a1abc374010b0fe9306bce31261
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
@@ -36,7 +40,7 @@ const ProfileSchema = new Schema({
         type: String
     },
     experience: [
-        {
+{
             title: {
             type: String,
             required: true
