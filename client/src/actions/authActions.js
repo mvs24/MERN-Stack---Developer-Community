@@ -46,3 +46,13 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+export const logoutUser = () => dispatch => {
+  // remove token from LS
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: {}
+  });
+};
