@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import TextField from "../Elements/TextField";
 
 class Login extends Component {
   state = {
@@ -35,6 +35,12 @@ class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   render() {
     const { errors } = this.state;
 
@@ -48,40 +54,30 @@ class Login extends Component {
                 Login to your Developer account
               </p>
               <form onSubmit={this.onSubmitHandler}>
-                <div className="form-group">
-                  <input
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.email
-                    })}
-                    onChange={this.onChangeHandler}
-                    value={this.state.email}
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                  />
-                  {errors.email && (
-                    <div className="invalid-feedback text-center">
-                      {errors.email}
-                    </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password
-                    })}
-                    onChange={this.onChangeHandler}
-                    value={this.state.password}
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                  />
-                  {errors.password && (
-                    <div className="invalid-feedback text-center">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
+                <TextField
+                  error={errors.email}
+                  onChange={this.onChangeHandler}
+                  value={this.state.email}
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  className={classnames("form-control form-control-lg", {
+                    "is-invalid": errors.email
+                  })}
+                />
+
+                <TextField
+                  error={errors.password}
+                  className={classnames("form-control form-control-lg", {
+                    "is-invalid": errors.password
+                  })}
+                  onChange={this.onChangeHandler}
+                  value={this.state.password}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                />
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -91,11 +87,6 @@ class Login extends Component {
     );
   }
 }
-
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => {
   return {
