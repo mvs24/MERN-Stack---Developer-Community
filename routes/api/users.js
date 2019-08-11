@@ -77,12 +77,13 @@ router.post('/register', (req, res)=>{
                 password: req.body.password
             });
 
+
             bcrypt.genSalt(10, (err, salt)=>{
                 bcrypt.hash(newUser.password, salt, (err, hash)=>{
                     if(err) throw err;
                     newUser.password = hash;
-                    newUser.save().then((userSaved)=>{
-                        res.json(userSaved)
+                    newUser.save().then((savedUser)=>{
+                        res.json(savedUser)
                     }).catch(err=>{
                         console.log(err);
                     })
@@ -122,6 +123,7 @@ router.post('/login', (req, res)=>{
         }
     })
 })
+
 
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res)=>{
