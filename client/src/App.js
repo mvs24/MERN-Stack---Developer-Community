@@ -14,10 +14,9 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
-import CreateProfile from "./components/Elements/create-profile/CreateProfile";
 
-import { clearCurrentProfile } from "./actions/profileActions";
-
+import CreateProfile from './components/Elements/create-profile/CreateProfile'
+import { clearCurrentProfile, createProfile } from "./actions/profileActions";
 import PrivateRoute from "./components/Elements/PrivateRoute";
 
 if (localStorage.jwtToken) {
@@ -32,6 +31,9 @@ if (localStorage.jwtToken) {
     window.location.href = "/login";
   }
 }
+
+
+
 
 class App extends Component {
   render() {

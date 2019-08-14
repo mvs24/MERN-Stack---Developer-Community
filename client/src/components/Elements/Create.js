@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import TextField from "../TextField";
-import TextArea from "../TextArea";
-import Input from "../Input";
-import SelectList from "../SelectList";
-import { createProfile } from '../../../actions/profileActions'
+import TextField from "./TextField";
+import TextArea from "./TextArea";
+import Input from "./Input";
+import SelectList from "./SelectList";
+import { createProfile } from "../../actions/profileActions";
 
 class CreateProfile extends Component {
   state = {
@@ -32,28 +32,30 @@ class CreateProfile extends Component {
     }
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
   onSubmit = e => {
     e.preventDefault();
+
     const profileData = {
-        handle: this.state.handle,
-        company: this.state.company,
-        website: this.state.website,
-        location: this.state.location,
-        status: this.state.status,
-        skills: this.state.skills,
-        githubusername: this.state.githubusername,
-        bio: this.state.bio,
-        twitter: this.state.twitter,
-        facebook: this.state.facebook,
-        linkedin: this.state.linkedin,
-        youtube: this.state.youtube,
-        instagram: this.state.instagram
-      };
-    this.props.createProfile(profileData, this.props.history)
+      handle: this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+      instagram: this.state.instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
@@ -112,6 +114,7 @@ class CreateProfile extends Component {
       );
     }
 
+    // Select options for status
     const options = [
       { label: "* Select your tatus", value: 0 },
       { label: "Developer", value: "Developer" },
@@ -135,7 +138,14 @@ class CreateProfile extends Component {
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-               
+                <TextField
+                  placeholder="* Profile Handle"
+                  name="handle"
+                  value={this.state.handle}
+                  onChange={this.onChange}
+                  error={errors.handle}
+                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                />
                 <SelectList
                   placeholder="Status"
                   name="status"
@@ -144,14 +154,6 @@ class CreateProfile extends Component {
                   options={options}
                   error={errors.status}
                   info="An idea of where you are at in your carrer"
-                />
-                 <TextField
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
                 <TextField
                   placeholder="Company"
@@ -239,4 +241,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {createProfile})(withRouter(CreateProfile));
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
