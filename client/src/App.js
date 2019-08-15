@@ -15,9 +15,10 @@ import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 
-import CreateProfile from './components/Elements/create-profile/CreateProfile'
+import CreateProfile from "./components/Elements/create-profile/CreateProfile";
 import { clearCurrentProfile, createProfile } from "./actions/profileActions";
 import PrivateRoute from "./components/Elements/PrivateRoute";
+import EditProfile from "./components/EditProfile/EditProfile";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -31,9 +32,6 @@ if (localStorage.jwtToken) {
     window.location.href = "/login";
   }
 }
-
-
-
 
 class App extends Component {
   render() {
@@ -52,7 +50,16 @@ class App extends Component {
                   path="/create-profile"
                   component={CreateProfile}
                 />
+              </Switch>
+              <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                />
               </Switch>
             </div>
             <Footer />
