@@ -12,14 +12,6 @@ const passport = require('passport');
  // user model
 const User = require('../../models/User')
 
-router.get('/', (req,res)=>{
-    res.json({
-        msg: "Users work"
-    })
-})
-
-   
-
 router.post('/register', (req, res)=>{
     const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -27,37 +19,6 @@ router.post('/register', (req, res)=>{
         return res.status(400).json(errors);
     }
 
-
-    // let errors = {};
-    // if(isEmpty(req.body.name)){
-    //     errors.name = "Name field is required";
-    // }
-    // if(req.body.email.length < 3){
-    //     errors.email = "Email is invalid";
-    // }
-    // if(req.body.email.length === 0 || req.body.email.indexOf('@') === -1){
-    //     errors.email = "Email field is required";
-    // }
-    // if(req.body.password.length < 6){
-    //     errors.password = 'Password must contains at least 6 characters';
-    // }
-    // if(req.body.password.length === 0){
-    //     errors.password = 'Password field is required';
-    // }
-    // if(req.body.password2.length === 0){
-    //     errors.password2 = 'Confirm Password field is required';
-    // }
-    // if(req.body.password !== req.body.password2){
-    //     errors.password2 = 'Passwords must match'
-    // }
-  
-    
-
-    // if(Object.keys(errors).length !== 0){
-    //     return res.status(400).json(errors);
-    // }
-        
-    
 
 
     User.findOne({ email: req.body.email }).then(user=>{
