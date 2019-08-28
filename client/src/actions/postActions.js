@@ -66,6 +66,7 @@ export const deletePost = id => dispatch => {
     );
 };
 
+
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
