@@ -30,6 +30,22 @@ export const addPost = postData => dispatch => {
       })
     );
 };
+export const addComment = (postId, data) => dispatch => {
+  axios
+    .post("/api/posts/comment/" + postId, data)
+    .then(res =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
@@ -48,7 +64,7 @@ export const getPosts = () => dispatch => {
       })
     );
 };
-export const getPost = (id) => dispatch => {
+export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
     .get("/api/posts/" + id)
@@ -82,7 +98,6 @@ export const deletePost = id => dispatch => {
       })
     );
 };
-
 
 export const addLike = id => dispatch => {
   axios

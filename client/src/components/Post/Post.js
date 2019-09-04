@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import Spinner from "../Elements/Spinner";
 import { getPost } from "../../actions/postActions";
 import PostItem from "../Posts/PostItem";
-import {Link}from 'react-router-dom'
-
+import { Link } from "react-router-dom";
+import CommentPost from "./CommentPost";
 
 export class Post extends Component {
   componentDidMount = () => {
@@ -18,16 +18,14 @@ export class Post extends Component {
       postContent = <Spinner />;
     } else {
       postContent = (
-      <div>
-          <PostItem
-          showActions={false}
-          post={post}
-          />
-      </div>
+        <div>
+          <PostItem showActions={false} post={post} />
+          <CommentPost postId={post._id} />
+        </div>
       );
     }
     return (
-        <div className="post">
+      <div className="post">
         <div className="continer">
           <div className="row">
             <div className="col-md-12">
@@ -39,7 +37,7 @@ export class Post extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
