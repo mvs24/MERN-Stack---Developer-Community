@@ -5,6 +5,7 @@ import { getPost } from "../../actions/postActions";
 import PostItem from "../Posts/PostItem";
 import { Link } from "react-router-dom";
 import CommentPost from "./CommentPost";
+import CommentFeed from "./CommentFeed";
 
 export class Post extends Component {
   componentDidMount = () => {
@@ -21,6 +22,7 @@ export class Post extends Component {
         <div>
           <PostItem showActions={false} post={post} />
           <CommentPost postId={post._id} />
+          <CommentFeed postId={post._id} comments={post.comments} />
         </div>
       );
     }
